@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guess My Number</title>
+        <link rel="stylesheet" href="style.css"> 
+    </head>
+    <body>
+        <h3>Guess My Number</h3>
+        <p>The computer is going to pick a number between 1 and 100. Your goal is to guess that number</p>
+        <input id="guess" type="text"> 
+        <button onclick="Process()">Search</button>
+        <p id="hint"></p>
+        <script>
+            //add the random number variable here and log it 
+            let rand = Math.floor(Math.random() * (100 - 1 + 1)) + 1; 
+            console.log(rand); 
+            console.log(rand); 
+            //create a function for the button 
+            function Process(){
+                //make a variable for words 
+                const words = document.getElementById("hint"); 
+                //set it to a blank value 
+                words.innerHTML = ""; 
+                //create a variable for x 
+                let x = document.getElementById("guess").value; 
+                //add a function for try. This is for catching the error and stating its type 
+                try{
+                    if(x.trim() == "") throw "empty"; 
+                    if(isNaN(x)) throw "Not a number. Enter a number between 1 and 100"; 
+                    x = Number(x); 
+                    if(x > 100) throw "That's too high. Please input a number between 1 and 100"; 
+                    if(x < 1) throw "That's too low. Please input a number between 1 and 100"; 
+                }
+                //add a catch statement for catching the error 
+                catch(err){
+                    words.innerHTML = err; 
+                }
+                //now use finally to keep running the program 
+                finally{
+                    //let rand = Math.floor(Math.random() * (100 - 1 + 1)) + 1; 
+                    //check if x is greater than rand 
+                    if(x > rand) {
+                        document.getElementById("hint")
+                        .innerHTML = x + " is higher than x. Guess again"; 
+                    }
+                    else if(x < rand) 
+                    {
+                        document.getElementById("hint")
+                        .innerHTML = x + " is lower than x. Guess again"; 
+                    }
+                    else if(x == rand){
+                        document.getElementById("hint")
+                        .innerHTML = x + " IS CORRECT!"; 
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
